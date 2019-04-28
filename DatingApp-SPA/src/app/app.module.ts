@@ -23,6 +23,11 @@ import { MemberDetailComponent } from "./members/member-detail/member-detail.com
 import { MemberDetailResolver } from "./_resolvers/member-detail-resolve";
 import { MemberListResolver } from "./_resolvers/member-list-resolve";
 import { NgxGalleryModule } from "ngx-gallery";
+import { MemberEditComponent } from "./members/member-edit/member-edit.component";
+import { MemberEditResolver } from "./_resolvers/member-edit-resolve";
+import { PreventUnsavedChanges } from "./_guards/prevent-unsaved-changes.guard";
+import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.component";
+import { FileUploadModule } from "ng2-file-upload";
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -37,7 +42,9 @@ export function tokenGetter() {
     MessagesComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,8 @@ export function tokenGetter() {
       }
     }),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
     AuthService,
@@ -62,7 +70,9 @@ export function tokenGetter() {
     AuthGuard,
     UserService,
     MemberDetailResolver,
-    MemberListResolver
+    MemberListResolver,
+    MemberEditResolver,
+    PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]
 })
